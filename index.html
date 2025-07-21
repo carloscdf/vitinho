@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="mensagem">
+    Você sabe exatamente a senha, aquela sequência de 8 números que eu uso para tudo.
+  </div>
+
+  <div class="login-box">
+    <div class="mascote">
+        <img src="images/bicho.png">
+    </div>
+    <form id="loginForm" onsubmit="return verificarSenha()">
+      <input type="password" id="senhaInput" placeholder="Digite a senha lindinho" required />
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="resultado" id="mensagemErro"></div>
+  </div>
+    <div class="background-image">
+        <img src="images/background.jpg">
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>

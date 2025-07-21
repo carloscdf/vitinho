@@ -1,0 +1,92 @@
+   @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+   
+   body {
+    font-family: "Inter", sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #060311;
+    }
+
+    .mensagem {
+      position: absolute;
+      top: 30px;
+      text-align: center;
+      font-size: 1.2em;
+      color: white;
+      max-width: 90%;
+      width: 412px;
+      background-color: #007BFF;
+
+    }
+
+    .login-box {
+      background: rgba(2, 4, 10, 0.41);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="password"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 200px;
+      margin-bottom: 10px;
+    }
+    
+    input:focus{
+        padding: 11px;
+        border: none;
+        outline: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .background-image{
+        position: absolute;
+        width: 412px;
+        height: 100vh;
+        z-index: -10;
+    }
+
+    .background-image > img{
+        width: 412px;
+        height: 100vh;
+        object-fit: cover;
+        object-position: center;
+    }
+    #loginForm{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mascote > img{
+        top: -55px;
+        position: absolute;
+        width: 50px;
+    }
