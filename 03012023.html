@@ -171,9 +171,12 @@
 </head>
 
 <body>
+<audio id="musicaFundo" loop preload="auto">
+  <source src="audio/musica.mp3" type="audio/mpeg" />
+</audio>
     <!-- Imagem fixa no topo -->
     <img src="images/vitinho.jpg" alt="Capa" class="capa" />
-    <h1 class="header">Feliz 21, Vitinho!</h1>
+    <h1 class="header">Feliz 21, Vitinho! 🥳</h1>
 
     <!-- Conteúdo rolável -->
     <div class="conteudo">
@@ -254,20 +257,84 @@
 
  <h1 class="header2">Foi simples, feito na pressa, mas foi de coração. <br>Te amamos.</h1>
 
- <script>
+
+ <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
   const carrossel = document.getElementById("carrossel");
   const slides = document.querySelectorAll(".slide");
   const totalSlides = slides.length;
 
+  const musicaFundo = document.getElementById("musicaFundo");
+  const homenagemAudio = document.querySelector("audio[controls]"); // garante que pega o player
+
   let index = 0;
 
+  // Carrossel
   setInterval(() => {
     index = (index + 1) % totalSlides;
     carrossel.style.transform = `translateY(-${index * 100}vh)`;
-  }, 5000); // 4 segundos
-</script>
+  }, 5000);
 
+  // Força o play da música de fundo quando possível
+  window.addEventListener("DOMContentLoaded", () => {
+    const playPromise = musicaFundo.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log("Música de fundo tocando!");
+        })
+        .catch((error) => {
+          console.warn("Autoplay bloqueado. Tocará após interação.");
+        });
+    }
+  });
+
+  // Pausar música de fundo se o usuário apertar play no áudio principal
+  homenagemAudio.addEventListener("play", () => {
+    if (!musicaFundo.paused) {
+      musicaFundo.pause();
+    }
+  });
+
+  // Retomar música de fundo quando o outro áudio for pausado
+  homenagemAudio.addEventListener("pause", () => {
+    musicaFundo.play().catch(() => {});
+  });
+// Função para disparar confetes
+function dispararConfete() {
+  confetti({
+    particleCount: 400,
+    spread: 150,
+    origin: { y: 0.2 },
+    startVelocity: 50,
+    colors: ['#ff5ebc', '#8aeaff', '#fff16a', '#fca6ff']
+  });
+}
+
+// Confetes ao carregar
+window.addEventListener("load", () => {
+  dispararConfete();
+});
+
+// Confetes ao alcançar a última <h1 class="header2">
+const ultimaHeader = document.querySelectorAll("h1.header2")[1]; // pega o segundo .header2 (o do fim)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      dispararConfete();
+      observer.unobserve(entry.target); // só explode uma vez
+    }
+  });
+}, {
+  threshold: 0.6 // dispara quando 60% do elemento estiver visível
+});
+
+if (ultimaHeader) {
+  observer.observe(ultimaHeader);
+}
+</script>
 
 </body>
 
-</html>
+</html> 
